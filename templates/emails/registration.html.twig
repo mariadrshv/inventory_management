@@ -1,0 +1,12 @@
+<h3>You did it! You registered!</h3>
+
+Hi {{ name }}! You're successfully registered.
+Your link to confirmation your email: http://127.0.0.1:8000/email/verif/{{ unique_link }} (go there) :)
+
+{# example, assuming you have a route named "login" #}
+{#To login, go to: <a href="{{ url('app_login') }}">...</a>.#}
+
+Thanks!
+
+{# Makes an absolute URL to the /images/logo.png file #}
+{#<img src="{{ absolute_url(asset('images/logo.png')) }}">#}

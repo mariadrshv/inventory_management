@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User profile{% endblock %}
+
+{% block body %}
+    <h1>User profile</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone number</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ user.email }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.address }}</td>
+                <td>{{ user.phoneNumber }}</td>
+                <td>
+                    <a href="{{ path('user_edit', {'id': user.id}) }}">edit | </a>
+                    <a href="{{ path('user_reset', {'id': user.id}) }}">reset password | </a>
+                    <a href="{{ path('user_change', {'id': user.id}) }}">change email</a>
+                </td>
+            </tr>
+            {% if property is defined and property %}
+                <table>
+                    <tr> MY PROPERTIES</tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ property.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td>{{ property.line1 }} {{ property.line2 }} {{ property.city }} {{ property.state }} {{ property.zip }}</td>
+                    </tr>
+                </table>
+            {% endif %}
+
+            {% if room is defined and room %}
+                <table>
+                    <tr>MY ROOMS</tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ room.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Room's property</th>
+                        <td>{{ room.property }}</td>
+                    </tr>
+                </table>
+            {% endif %}
+
+            {% if item is defined and item %}
+                <table>
+                    <tr>MY ITEMS</tr>
+                    <tr>
+                        <th>Name</th>
+                        <td>{{ item.name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Item's room</th>
+                        <td>{{ item.room }}</td>
+                    </tr>
+                    <tr>
+                        <th>Item's property</th>
+                        <td>{{ item.room.property }}</td>
+                    </tr>
+            {% endif %}
+            </table>
+        </tbody>
+    </table>
+
+    <a href="{{ path('property_index') }}">Back to properties</a>
+
+    <form class="pull-right hidden" role="search" id="nav-search-form" method="post" action="{{ path('search') }}">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name ="search">
+            <span class="input-group-btn">
+            <input type="submit" name="submit" value="Search inventary in db">
+          </span>
+        </div>
+    </form>
+
+    {% if success is defined and success %}
+        <div>
+            {% trans %} reset {% endtrans %}
+        </div>
+    {%  endif %}
+    {% if successemail is defined and successemail %}
+        <div>
+            {% trans %} confirm {% endtrans %}
+        </div>
+    {%  endif %}
+{% endblock %}

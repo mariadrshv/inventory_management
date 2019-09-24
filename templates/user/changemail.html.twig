@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Change email{% endblock %}
+
+{% block body %}
+    <form method="post" action="{{ path('maillink') }}">
+        <h1>Change email</h1>
+
+        <label for="inputEmail" class="sr-only">New Email</label>
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required><br>
+
+        <button type="submit" value="change">Change email</button>
+        <p>(we will send a confirm link to your new email - pay attention)</p>
+    </form>
+
+    {% if success is defined and success %}
+        <div>
+            {% trans %} sendemaillink {% endtrans %}
+        </div>
+    {%  endif %}
+
+    <a href="{{ path('user_index') }}">back to profile</a>
+
+
+{% endblock %}

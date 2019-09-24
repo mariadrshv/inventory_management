@@ -1,0 +1,39 @@
+{% extends 'room/breadcrumbs.html.twig' %}
+
+{% block title %}Room index{% endblock %}
+
+{% block body %}
+    <h1>Room index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Descriptions</th>
+                {#<th>Photo</th>#}
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for room in rooms %}
+            <tr>
+                <td>{{ room.name }}</td>
+                <td>{{ room.width }}{{ '/' }}{{ room.height }}{{ '/' }}{{ room.depth }}</td>
+                {#<td><img src="{{ asset(photo) }}" height="50" width="50" alt=""></td>#}
+                <td>
+                    <a href="{{ path('room_show', {'id': room.id, 'prop_id': property.id}) }}">show</a>
+                    <a href="{{ path('room_edit', {'prop_id': property.id, 'id': room.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('room_new', {'prop_id': property.id}) }}">Create new</a><br>
+    <a href="{{ path('property_index') }}">Back to property list</a><br>
+    <a href="{{ path('app_logout') }}">Logout</a>
+{% endblock %}

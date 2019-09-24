@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Warranties{% endblock %}
+
+{% block body %}
+    <h1>Warranties</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ warranty.id }}</td>
+            </tr>
+            <tr>
+                <th>Exp_date</th>
+                <td>{{ warranty.expDate ? warranty.expDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Provider_name</th>
+                <td>{{ warranty.providerName }}</td>
+            </tr>
+            <tr>
+                <th>Phone_number</th>
+                <td>{{ warranty.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ warranty.line1 }} {{ warranty.line2 }} {{ warranty.city }} {{ warranty.state }} {{ warranty.zip }}</td>
+            </tr>
+            <tr>
+                <th>Notes</th>
+                <td>{{ warranty.notes }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td><img src="{{ asset(photo) }}" height="50" width="50" alt=""></td>
+            </tr>
+        </tbody>
+    </table>
+    {% if property is defined and property %}
+        <a href="{{ path('warranties_edit', {'entity': 'property', 'entity_id': property.id, 'id': warranty.id}) }}">edit</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'property', 'entity_id': property.id}) }}">Back to list</a><br>
+    {% elseif room is defined and room %}
+        <a href="{{ path('warranties_edit', {'entity': 'room', 'entity_id': room.id, 'id': warranty.id}) }}">edit</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'room', 'entity_id': room.id}) }}">Back to list</a><br>
+    {% elseif item is defined and item %}
+        <a href="{{ path('warranties_edit', {'entity': 'item', 'entity_id': item.id, 'id': warranty.id}) }}">edit</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'item', 'entity_id': item.id}) }}">Back to list</a><br>
+    {% endif %}
+
+    {% if property is defined and property %}
+        <a href="{{ path('warranties_delete', {'entity': 'property', 'entity_id': property.id, 'id': warranty.id}) }}">Delete warranty</a><br>
+    {% elseif room is defined and room %}
+        <a href="{{ path('warranties_delete', {'entity': 'room', 'entity_id': room.id, 'id': warranty.id}) }}">Delete warranty</a><br>
+    {% elseif item is defined and item %}
+        <a href="{{ path('warranties_delete', {'entity': 'item', 'entity_id': item.id, 'id': warranty.id}) }}">Delete warranty</a><br>
+    {% endif %}
+{% endblock %}

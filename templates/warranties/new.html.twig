@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Warranties{% endblock %}
+
+{% block body %}
+    <h1>Create new Warranty</h1>
+
+    {{ include('warranties/_form.html.twig') }}
+
+    {% if property is defined and property %}
+        <a href="{{ path('warranties_list', {'entity': 'property', 'entity_id': property.id}) }}">Back to list</a>
+    {% elseif room is defined and room %}
+        <a href="{{ path('warranties_list', {'entity': 'room', 'entity_id': room.id}) }}">Back to list</a>
+    {% elseif item is defined and item %}
+        <a href="{{ path('warranties_list', {'entity': 'item', 'entity_id': item.id}) }}">Back to list</a>
+    {% endif %}
+{% endblock %}

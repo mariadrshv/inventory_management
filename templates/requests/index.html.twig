@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Requests index{% endblock %}
+
+{% block body %}
+    <h1>Requests index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Status</th>
+                <th>PropertyAddress</th>
+                <th>Notes</th>
+                <th>Creation_date</th>
+                <th>Update_date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for request in requests %}
+            <tr>
+                <td>{{ request.id }}</td>
+                <td>{{ request.status }}</td>
+                <td>{{ request.propertyAddress }}</td>
+                <td>{{ request.notes }}</td>
+                <td>{{ request.creationDate ? request.creationDate|date('Y-m-d') : '' }}</td>
+                <td>{{ request.updateDate ? request.updateDate|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('requests_show', {'id': request.id}) }}">show</a>
+                    <a href="{{ path('requests_edit', {'id': request.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('requests_new') }}">Create new</a>
+{% endblock %}

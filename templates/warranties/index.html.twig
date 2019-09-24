@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Warranties index{% endblock %}
+
+{% block body %}
+    <h1>Warranties index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Exp_date</th>
+                <th>Provider_name</th>
+                <th>Phone_number</th>
+                <th>Notes</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for warranty in warranties %}
+            <tr>
+                <td>{{ warranty.id }}</td>
+                <td>{{ warranty.expDate ? warranty.expDate|date('Y-m-d') : '' }}</td>
+                <td>{{ warranty.providerName }}</td>
+                <td>{{ warranty.phoneNumber }}</td>
+                <td>{{ warranty.notes }}</td>
+                <td>
+                    {% if property is defined and property %}
+                        <a href="{{ path('warranties_show', {'id': warranty.id, 'entity': 'property', 'entity_id': property.id}) }}">show</a><br>
+                    {% elseif room is defined and room %}
+                        <a href="{{ path('warranties_show', {'id': warranty.id, 'entity': 'room', 'entity_id': room.id}) }}">show</a><br>
+                    {% elseif item is defined and item %}
+                        <a href="{{ path('warranties_show', {'id': warranty.id, 'entity': 'item', 'entity_id': item.id}) }}">show</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {% if property is defined and property %}
+        <a href="{{ path('warranties_new', {'entity': 'property', 'entity_id': property.id}) }}">Create new</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'property' , 'entity_id' : property.id, 'field' : 'exp_date', 'order': 'desc'}) }}">Sort by exp_date (desc)</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'property' , 'entity_id' : property.id, 'field' : 'exp_date', 'order': 'asc'}) }}">Sort by exp_date (asc)</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'property' , 'entity_id' : property.id, 'field' : 'id', 'order': 'desc'}) }}">Sort by ID (desc)</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'property' , 'entity_id' : property.id, 'field' : 'id', 'order': 'asc'}) }}">Sort by ID (asc)</a><br>
+    {% elseif room is defined and room %}
+        <a href="{{ path('warranties_new', {'entity': 'room', 'entity_id': room.id}) }}">Create new</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'room' , 'entity_id' : room.id, 'field' : 'exp_date', 'order': 'desc'}) }}">Sort by exp_date (desc)</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'room' , 'entity_id' : room.id, 'field' : 'exp_date', 'order': 'asc'}) }}">Sort by exp_date (asc)</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'room' , 'entity_id' : room.id, 'field' : 'id', 'order': 'desc'}) }}">Sort by ID (desc)</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'room' , 'entity_id' : room.id, 'field' : 'id', 'order': 'asc'}) }}">Sort by ID (asc)</a><br>
+    {% elseif item is defined and item %}
+	    <a href="{{ path('warranties_new', {'entity': 'item', 'entity_id': item.id}) }}">Create new</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'item' , 'entity_id' : item.id, 'field' : 'exp_date', 'order': 'desc'}) }}">Sort by exp_date (desc)</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'item' , 'entity_id' : item.id, 'field' : 'exp_date', 'order': 'asc'}) }}">Sort by exp_date (asc)</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'item' , 'entity_id' : item.id, 'field' : 'id', 'order': 'desc'}) }}">Sort by ID (desc)</a><br>
+        <a href="{{ path('warranties_list', {'entity': 'item' , 'entity_id' : item.id, 'field' : 'id', 'order': 'asc'}) }}">Sort by ID (asc)</a><br>
+    {% endif %}
+{% endblock %}

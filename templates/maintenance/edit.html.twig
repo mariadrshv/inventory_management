@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Maintenance{% endblock %}
+
+{% block body %}
+    <h1>Edit Maintenance</h1>
+
+    {{ include('maintenance/_form.html.twig', {'button_label': 'Update'}) }}
+
+    {% if property is defined and property %}
+        <a href="{{ path('maintenance_list_property', {'prop_id': property.id}) }}">Back to list</a>
+    {% elseif room is defined and room %}
+        <a href="{{ path('maintenance_list_room', {'room_id': room.id}) }}">Back to list</a>
+    {% elseif item is defined and item %}
+        <a href="{{ path('maintenance_list_item', {'item_id': item.id}) }}">Back to list</a>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Maintenance{% endblock %}
+
+{% block body %}
+    <h1>Maintenance</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ maintenance.id }}</td>
+            </tr>
+            <tr>
+                <th>Provider_name</th>
+                <td>{{ maintenance.providerName }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ maintenance.date ? maintenance.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ maintenance.description }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ maintenance.price }}</td>
+            </tr>
+            <tr>
+                <th>Note</th>
+                <td>{{ maintenance.note }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td><img src="{{ asset(photo) }}" height="50" width="50" alt=""></td>
+            </tr>
+        </tbody>
+    </table>
+
+    {% if property is defined and property %}
+        <a href="{{ path('maintenance_edit', {'entity': 'property', 'entity_id': property.id, 'id': maintenance.id}) }}">edit</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'property', 'entity_id': property.id}) }}">back to list</a><br>
+    {% elseif room is defined and room %}
+        <a href="{{ path('maintenance_edit', {'entity': 'room', 'entity_id': room.id, 'id': maintenance.id}) }}">edit</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'room', 'entity_id': room.id}) }}">back to list</a><br>
+    {% elseif item is defined and item %}
+        <a href="{{ path('maintenance_edit', {'entity': 'item', 'entity_id': item.id, 'id': maintenance.id}) }}">edit</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'item', 'entity_id': item.id}) }}">Back to list</a><br>
+    {% endif %}
+
+
+    {% if property is defined and property %}
+        <a href="{{ path('maintenance_delete', {'entity': 'property', 'entity_id': property.id, 'id': maintenance.id}) }}">Delete maintenance</a><br>
+    {% elseif room is defined and room %}
+        <a href="{{ path('maintenance_delete', {'entity': 'room', 'entity_id': room.id, 'id': maintenance.id}) }}">Delete maintenance</a><br>
+    {% elseif item is defined and item %}
+        <a href="{{ path('maintenance_delete', {'entity': 'item', 'entity_id': item.id, 'id': maintenance.id}) }}">Delete maintenance</a><br>
+    {% endif %}
+{% endblock %}

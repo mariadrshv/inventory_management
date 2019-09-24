@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Technician index{% endblock %}
+
+{% block body %}
+    <h1>Technician index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Type</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for technician in technicians %}
+            <tr>
+                <td>{{ technician.name }}</td>
+                <td>{{ technician.phone }}</td>
+                <td>{{ technician.line1 }} {{ technician.line2 }} {{ technician.city }} {{ technician.state }} {{ technician.zip }}</td>
+                <td>{{ technician.type }}</td>
+                <td>
+                    <a href="{{ path('technician_show', {'id': technician.id}) }}">show |</a>
+                    <a href="{{ path('technician_edit', {'id': technician.id}) }}">edit |</a>
+                    <a href="{{ path('technician_change', {'id': technician.id}) }}">change status (1 = active; 0 = blocked)</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <form class="pull-right hidden" role="search" id="nav-search-form" method="post" action="{{ path('search_tech') }}">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search" name ="search">
+            <span class="input-group-btn">
+            <input type="submit" name="submit" value="Search technician by name">
+          </span>
+        </div>
+    </form>
+
+    <a href="{{ path('technician_index', {'field': 'name', 'order': 'asc'}) }}">Sort by name</a><br>
+    <a href="{{ path('technician_new') }}">Create new</a><br>
+    <a href="{{ path('app_logout') }}">Logout</a>
+{% endblock %}

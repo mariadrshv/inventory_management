@@ -1,0 +1,9 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+homepage:
+  path: /
+  controller: App\Controller\SecurityController::login
+  defaults:
+    path: /app
+    permanent: true

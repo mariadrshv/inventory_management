@@ -1,0 +1,7 @@
+singup: 'Success! Check your mailbox and find our letter there:)'
+reset: 'Now check your mail and find a link to reset your pass.'
+newpass: 'Your password change successfully!'
+mistakepass: 'Repeat again. Repeat your new password carefully.'
+profile: 'Your profile update successfully!'
+sendemaillink: 'Check your new email address and find there link to confirm your new email'
+confirm: 'Great work! Your mail successfully confirm!'

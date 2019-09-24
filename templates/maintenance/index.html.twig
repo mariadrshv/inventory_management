@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Maintenance index{% endblock %}
+
+{% block body %}
+    <h1>Maintenance index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Date</th>
+                <th>Provider_name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Note</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for maintenance in maintenances %}
+            <tr>
+                <td>{{ maintenance.id }}</td>
+                <td>{{ maintenance.date ? maintenance.date|date('Y-m-d') : '' }}</td>                <td>{{ maintenance.providerName }}</td>
+
+                <td>{{ maintenance.description }}</td>
+                <td>{{ maintenance.price }}</td>
+                <td>{{ maintenance.note }}</td>
+                <td>
+                    {% if property is defined and property %}
+                        <a href="{{ path('show_maintenance', {'id': maintenance.id, 'entity': 'property', 'entity_id': property.id}) }}">show</a><br>
+                    {% elseif room is defined and room %}
+                        <a href="{{ path('show_maintenance', {'id': maintenance.id, 'entity': 'room', 'entity_id': room.id}) }}">show</a><br>
+                    {% elseif item is defined and item %}
+                        <a href="{{ path('show_maintenance', {'id': maintenance.id, 'entity': 'item', 'entity_id': item.id}) }}">show</a>
+                    {% endif %}
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+	{% if property is defined and property %}
+		<a href="{{ path('maintenance_new', {'entity': 'property', 'entity_id': property.id}) }}">Create new</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'property' , 'entity_id' : property.id, 'field' : 'price', 'order': 'desc'}) }}">Sort by price (desc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'property' , 'entity_id' : property.id, 'field' : 'price', 'order': 'asc'}) }}">Sort by price (asc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'property' , 'entity_id' : property.id, 'field' : 'date', 'order': 'desc'}) }}">Sort by DATE (desc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'property' , 'entity_id' : property.id, 'field' : 'date', 'order': 'asc'}) }}">Sort by DATE (asc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'property' , 'entity_id' : property.id, 'field' : 'id', 'order': 'desc'}) }}">Sort by ID (desc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'property' , 'entity_id' : property.id, 'field' : 'id', 'order': 'asc'}) }}">Sort by ID (asc)</a><br>
+	{% elseif room is defined and room %}
+		<a href="{{ path('maintenance_new', {'entity': 'room', 'entity_id': room.id}) }}">Create new</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'room' , 'entity_id' : room.id, 'field' : 'price', 'order': 'desc'}) }}">Sort by price (desc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'room' , 'entity_id' : room.id, 'field' : 'price', 'order': 'asc'}) }}">Sort by price (asc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'room' , 'entity_id' : room.id, 'field' : 'date', 'order': 'desc'}) }}">Sort by DATE (desc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'room' , 'entity_id' : room.id, 'field' : 'date', 'order': 'asc'}) }}">Sort by DATE (asc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'room' , 'entity_id' : room.id, 'field' : 'id', 'order': 'desc'}) }}">Sort by ID (desc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'room' , 'entity_id' : room.id, 'field' : 'id', 'order': 'asc'}) }}">Sort by ID (asc)</a><br>
+	{% elseif item is defined and item %}
+		<a href="{{ path('maintenance_new', {'entity': 'item', 'entity_id': item.id}) }}">Create new</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'item' , 'entity_id' : item.id, 'field' : 'price', 'order': 'desc'}) }}">Sort by price (desc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'item' , 'entity_id' : item.id, 'field' : 'price', 'order': 'asc'}) }}">Sort by price (asc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'item' , 'entity_id' : item.id, 'field' : 'date', 'order': 'desc'}) }}">Sort by DATE (desc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'item' , 'entity_id' : item.id, 'field' : 'date', 'order': 'asc'}) }}">Sort by DATE (asc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'item' , 'entity_id' : item.id, 'field' : 'id', 'order': 'desc'}) }}">Sort by ID (desc)</a><br>
+        <a href="{{ path('maintenance_list', {'entity': 'item' , 'entity_id' : item.id, 'field' : 'id', 'order': 'asc'}) }}">Sort by ID (asc)</a><br>
+	{% endif %}
+{% endblock %}

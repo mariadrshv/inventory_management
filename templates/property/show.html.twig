@@ -1,0 +1,43 @@
+{% extends 'property/breadcrumbs.html.twig' %}
+
+{% block title %}Property{% endblock %}
+
+{% block body %}
+    <h1>Property</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ property.name }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ property.line1 }} {{ property.line2 }} {{ property.city }} {{ property.state }} {{ property.zip }}</td>
+            </tr>
+            <tr>
+                <th>Phone number</th>
+                <td>{{ property.phoneNumber }}</td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td><img src="{{ asset(photo) }}" height="50" width="50" alt=""></td>
+            </tr>
+            <tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('warranties_list', {'entity': 'property', 'entity_id': property.id} )}}">Property warranties</a><br>
+
+    <a href="{{ path('maintenance_list', {'entity': 'property', 'entity_id': property.id} )}}">Property maintenance</a><br>
+
+    <a href="{{ path('room_index', {'prop_id': property.id}) }}">Property rooms</a><br>
+
+    <a href="{{ path('property_index') }}">back to list |</a>
+
+    <a href="{{ path('property_edit', {'id': property.id}) }}">edit |</a>
+
+    <a href="{{ path('app_logout') }}">Logout</a>
+
+    {{ include('property/_delete_form.html.twig') }}
+{% endblock %}

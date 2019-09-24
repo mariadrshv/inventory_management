@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Maintenance{% endblock %}
+
+{% block body %}
+    <h1>Create new Maintenance</h1>
+
+    {{ include('maintenance/_form.html.twig') }}
+
+    {% if property is defined and property %}
+        <a href="{{ path('maintenance_list_property', {'prop_id': property.id}) }}">back to list</a>
+    {% elseif room is defined and room %}
+        <a href="{{ path('maintenance_list_room', {'room_id': room.id}) }}">back to list</a>
+    {% elseif item is defined and item %}
+        <a href="{{ path('maintenance_list_item', {'item_id': item.id}) }}">back to list</a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<body>
+
+    <div id="sidebar">
+        {% block sidebar %}
+            <ul>
+                <li>{{ property.name }}<a href="{{ path('property_show', {'id': property.id}) }}"> > show details of property</a></li>
+                {% if rooms is defined and rooms %}
+                    {% for room in rooms %}
+                    <li>{{ room.name }}<a href="{{ path('room_show', {'id': room.id, 'prop_id': property.id}) }}"> > show details of room</a></li>
+                    {% endfor %}
+                {% endif %}
+                {% if room is defined and room %}
+                    <li>{{ room.name }}<a href="{{ path('room_show', {'id': room.id, 'prop_id': property.id}) }}"> > show details of room</a></li>
+                {% endif %}
+                {% if items is defined and items %}
+                    {% for item in items %}
+                        <li>{{ item.name }}<a href="{{ path('item_show', {'id': item.id, 'room_id': room.id, 'prop_id': property.id}) }}"> > show details of item</a></li>
+                    {% endfor %}
+                {% endif %}
+                {% if item is defined and item %}
+                        <li>{{ item.name }}<a href="{{ path('item_show', {'id': item.id, 'room_id': room.id, 'prop_id': property.id}) }}"> > show details of item</a></li>
+                {% endif %}
+
+            </ul>
+        {% endblock %}
+    </div>
+<div id="content">
+    {% block body %}{% endblock %}
+</div>
+</body>
+
+</html>

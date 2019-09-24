@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Technician Sort{% endblock %}
+
+{% block body %}
+    <h1>Technician index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Status</th>
+            <th>Type</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for technician in technicians %}
+            <tr>
+                <td>{{ technician.id }}</td>
+                <td>{{ technician.name }}</td>
+                <td>{{ technician.phone }}</td>
+                <td>{{ technician.address }}</td>
+                <td>{{ technician.status }}</td>
+                <td>{{ technician.type }}</td>
+                <td>
+                    <a href="{{ path('technician_show', {'id': technician.id}) }}">show |</a>
+                    <a href="{{ path('technician_edit', {'id': technician.id}) }}">edit |</a>
+                    <a href="{{ path('technician_change', {'id': technician.id}) }}">change status (1 = active; 0 = blocked)</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('technician_index') }}">Back to origin list</a>
+    <a href="{{ path('technician_new') }}">Create new</a>
+
+    <a href="{{ path('app_logout') }}">Logout</a>
+{% endblock %}

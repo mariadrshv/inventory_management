@@ -1,0 +1,39 @@
+{% extends 'property/breadcrumbs.html.twig' %}
+
+{% block title %}Property index{% endblock %}
+
+{% block body %}
+    <h1>Property index</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone Number</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            {% for property in properties %}
+                <tr>
+                    <td>{{ property.name }}</td>
+                    <td>{{ property.line1 }} {{ property.line2 }} {{ property.city }} {{ property.state }} {{ property.zip }}</td>
+                    <td>{{ property.phoneNumber }}</td>
+                    <td>
+                        <a href="{{ path('property_show', {'id': property.id}) }}">show</a>
+                        <a href="{{ path('property_edit', {'id': property.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('property_new') }}">Create new</a><br>
+    <a href="{{ path('user_index') }}">Show my profile</a><br>
+    <a href="{{ path('app_logout') }}">Logout</a>
+
+{% endblock %}
